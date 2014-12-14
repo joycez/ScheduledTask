@@ -1,0 +1,316 @@
+<!-- <cf_helpdesk_header2 pagetitle="Scheduled Tasks" headerText="Scheduled Tasks" currentLink="Scheduled Tasks" > -->
+
+<div class="col-md-9">
+<h2>Add Scheduled Task</h2>
+	<form class="form-horizontal" role="form" id="addTaskForm">
+
+        <!---  Basic information --->
+    	<div class="form-group">
+            <label for="name" class="col-sm-2 control-label">Name</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="name" name="name" placeholder="Task name" required>
+            </div>
+        </div>
+
+    	<div class="form-group">
+            <label for="description" class="col-sm-2 control-label">Description</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="description" name="description" placeholder="Task description (Optional)">
+            </div>
+        </div>
+
+        <!---  TODO: Ask for relative path --->
+    	<div class="form-group">
+            <label for="template" class="col-sm-2 control-label">Template</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="template" name="template" placeholder="The ColdFusion cfm file for this task." required>
+            </div>
+        </div>
+        
+        <div class="form-group">
+			<label for="repeats" class="col-sm-2 control-label">Repeats</label>
+            <div class="col-sm-2">
+            	<select class="form-control" id="repeats" name="repeats" required>
+                	<option value="Never" selected>Never</option>
+                    <option value="Daily">Daily</option>
+                    <option value="Weekly">Weekly</option>
+                    <option value="Monthly">Monthly</option>
+                    <option value="Yearly">Yearly</option>
+                </select>
+			</div>
+        </div>
+ 
+        <!---  Daily section --->
+        <div class="form-group" id="daily-section">
+        	<label for="repeat-every" class="col-sm-2 control-label">Repeat every</label>    
+        	<div id="repeat-every">
+                <div class="col-sm-2" style="float:none;display:inline-block">
+                    <input type="number" min="1" step="1" class="form-control every-field" name="repeatEveryDaily" id="repeat-every-daily" placeholder="Positive integer" required>
+                </div>day(s)
+            </div>
+        </div>
+        
+        <!---  Weekly section --->
+        <div id="weekly-section">
+        	<div class="form-group">
+                <label for="repeat-every" class="col-sm-2 control-label">Repeat every</label>    
+                <div id="repeat-every">
+                    <div class="col-sm-2" style="float:none;display:inline-block">
+                        <input type="number" min="1" step="1" class="form-control every-field" name="repeatEveryWeekly" id="repeat-every-weekly" placeholder="Positive integer" required>
+                    </div>week(s)
+                </div>
+            </div>
+        	<div class="form-group">            
+                <label for="repeat-on" class="col-sm-2 control-label">Repeat on</label>
+                <div class="btn-group col-sm-10" data-toggle="buttons-checkbox" name="weekCheckbox" required>
+                  <button type="button" class="btn btn-default active">S</button>
+                  <button type="button" class="btn btn-default">M</button>
+                  <button type="button" class="btn btn-default">T</button>
+                  <button type="button" class="btn btn-default">W</button>
+                  <button type="button" class="btn btn-default">T</button>
+                  <button type="button" class="btn btn-default">F</button> 
+                  <button type="button" class="btn btn-default">S</button>             
+                </div>
+            </div>
+        </div>
+
+        <!---  Monthly section --->
+        <div id="monthly-section">
+        	<div class="form-group">
+                <label for="repeat-every" class="col-sm-2 control-label">Repeat every</label>    
+                <div id="repeat-every">
+                    <div class="col-sm-2" style="float:none;display:inline-block">
+                        <input type="number" min="1" step="1" class="form-control every-field" name="repeatEveryMonthly" id="repeat-every-monthly" placeholder="Positive integer" required>
+                    </div>month(s)
+                </div>
+            </div>
+            <div class="form-group">
+            	<label for="monthly-repeat-on" class="col-sm-2 control-label">Repeat on</label>
+                <div class="col-sm-5" id="monthly-repeat-on">Day<div class="col-sm-4" style="float:none;display:inline-block">
+                    <select name="days" class="form-control" id="days" style="float:none;display:inline-block" required>
+                        <option value="01">01</option>
+                        <option value="02">02</option>
+                        <option value="03">03</option>
+                        <option value="04">04</option>
+                        <option value="05">05</option>
+                        <option value="06">06</option>
+                        <option value="07">07</option>
+                        <option value="08">08</option>
+                        <option value="09">09</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                        <option value="24">24</option>
+                        <option value="25">25</option>
+                        <option value="26">26</option>
+                        <option value="27">27</option>
+                        <option value="28">28</option>
+                        <option value="29">29</option>
+                        <option value="30">30</option>
+                        <option value="31">31</option>
+                        <option value="-1">Last day of the month</option>
+                    </select></div>
+                </div>                            
+            </div>                   
+        </div>
+
+        <!---  Yearly section --->
+        <div id="yearly-section">
+        	<div class="form-group">
+                <label for="repeat-every" class="col-sm-2 control-label">Repeat every</label>    
+                <div id="repeat-every">
+                    <div class="col-sm-2" style="float:none;display:inline-block">
+                        <input type="number" name="repeat-every-yearly" id="repeatEveryYearly" min="1" step="1" class="form-control every-field"  placeholder="Positive integer" required>
+                    </div> year(s)
+                </div>
+            </div>
+            <div class="form-group">
+            	<label for="repeat-on" class="col-sm-2 control-label">Repeat on</label>
+            	<div class="col-sm-2">
+                    <select name="months" class="form-control" id="months" required>
+                        <option value="01">January</option>
+                        <option value="02">February</option>
+                        <option value="03">March</option>
+                        <option value="04">April</option>
+                        <option value="05">May</option>
+                        <option value="06">June</option>
+                        <option value="07">July</option>
+                        <option value="08">August</option>
+                        <option value="09">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12">December</option>
+                    </select>
+                </div>
+                <div class="col-sm-2">
+                    <select name="days" class="form-control" id="days" required>
+                        <option value="01">01</option>
+                        <option value="02">02</option>
+                        <option value="03">03</option>
+                        <option value="04">04</option>
+                        <option value="05">05</option>
+                        <option value="06">06</option>
+                        <option value="07">07</option>
+                        <option value="08">08</option>
+                        <option value="09">09</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                        <option value="24">24</option>
+                        <option value="25">25</option>
+                        <option value="26">26</option>
+                        <option value="27">27</option>
+                        <option value="28">28</option>
+                        <option value="29">29</option>
+                        <option value="30" id="Feb">30</option>
+                        <option value="31" id="M31">31</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!---  Repeats range --->
+    	<div class="form-group" id="date-only">
+            <label for="date" class="col-sm-2 control-label">Repeats On</label>
+            <div class="col-sm-2"><input type="text" class="form-control" id="date" required></div>
+        </div> 
+
+		<div id="datetime">        
+            <div class="form-group">
+                <label for="start-date" class="col-sm-2 control-label">Starts</label>
+                <div class="col-sm-2"><input type="text" class="form-control date" id="start-date" required></div>
+            </div>        
+
+            <div class="form-group">
+                <label for="end-date" class="col-sm-2 control-label">Ends</label>
+                <div class="col-sm-2"><input type="text" class="form-control date" id="end-date">
+                                      <span>(Leaving this blank indicates infinity.)</span></div>
+            </div>
+        </div>
+          
+        <div class="form-group">
+            <label for="tune" class="col-sm-2 control-label">Repeats At</label>
+            <div class="col-sm-2"><input type="text" class="form-control" id="time" name="repeatsAt" required></div>
+        </div>
+
+
+        <div class="form-group">
+            <button type="submit" class="col-sm-offset-2 col-sm-2 btn btn-primary">Add</button>
+        </div>
+
+    </form>
+</div>
+
+
+<script>
+    $(document).ready(function(){
+
+    <!--- Display different fields based on the 'Repeats' mode --->
+        $("select").change(function(){
+            $( "select option:selected").each(function(){
+                if($(this).attr("value")=="Never"){
+					$("#daily-section").hide();
+					$("#weekly-section").hide();
+                    $("#monthly-section").hide();
+					$("#yearly-section").hide();
+					$("#datetime").hide();
+					$("#date-only").show();
+                } else {
+					$("#datetime").show();
+					$("#date-only").hide();
+				}
+								
+                if($(this).attr("value")=="Daily"){
+					$("#weekly-section").hide();
+                    $("#monthly-section").hide();
+					$("#yearly-section").hide();
+                    $("#daily-section").show();
+                }
+                if($(this).attr("value")=="Weekly"){
+					$("#daily-section").hide();
+                    $("#monthly-section").hide();
+					$("#yearly-section").hide();
+                    $("#weekly-section").show();
+                }				
+                if($(this).attr("value")=="Monthly"){
+                    $("#daily-section").hide();
+					$("#weekly-section").hide();
+					$("#yearly-section").hide();
+                    $("#monthly-section").show();
+                }
+                if($(this).attr("value")=="Yearly"){
+                    $("#daily-section").hide();
+					$("#weekly-section").hide();
+					$("#monthly-section").hide();
+                    $("#yearly-section").show();
+                }				
+            })
+        }).change();
+
+        <!--- Date choice based on the Month choice --->
+        $('#months').on('change', function() {
+            $("#Feb").show();
+            $("#M31").show();
+            if (jQuery.inArray($("#months").val(), ["02", "04", "06", "09", "11"]) != -1)
+                $("#M31").hide();
+            if ($("#months").val() == "02")
+                $("#Feb").hide();    
+        });
+
+        <!--- end-date is after start-date --->
+        $('#start-date').datepicker({
+            beforeShow : function(){
+                $(this).datepicker('option', {'maxDate': $('#end-date').val(),
+                                              'minDate': '0'});
+            }
+        });
+
+        $('#end-date').datepicker({
+            beforeShow : function(){
+                var currentStartDate = $('#start-date').val();
+                if (currentStartDate == '') {
+                    $(this).datepicker('option', 'minDate', '0');
+                } else {
+                    $(this).datepicker('option', 'minDate', $('#start-date').val());
+                }      
+            }
+        });
+
+        <!--- Default start-date is Today --->
+        $('#start-date').datepicker('setDate', 'today');
+
+        <!--- Timepicker plugin for 'Repeats At' --->
+        $('#time').timepicker();
+
+        <!--- jQuery validate plugin --->
+        $( "#addTaskForm" ).validate();
+
+        <!--- Ensure 'Repeat every' input is a positive integer --->
+        $(".every-field").keypress(function(event) {
+            return /\d/.test(String.fromCharCode(event.keyCode));
+        });
+
+    });
+</script>
